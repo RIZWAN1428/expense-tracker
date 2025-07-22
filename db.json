@@ -1,0 +1,25 @@
+{
+  "expenses": [
+    {
+      "id": "03c6",
+      "title": "Pen",
+      "category": "Utilities",
+      "amount": 10,
+      "date": "2025-07-14T18:30:00.000Z"
+    },
+    {
+      "title": "Burger",
+      "category": "Food",
+      "amount": 4290,
+      "date": "2025-07-13T18:30:00.000Z",
+      "id": "edb3"
+    },
+    {
+      "title": "abcd",
+      "category": "Transport",
+      "amount": 520,
+      "date": "2025-07-06T18:30:00.000Z",
+      "id": "0ed6"
+    }
+  ]
+}

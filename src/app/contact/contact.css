@@ -1,0 +1,13 @@
+h2 {
+    color: black;
+    margin-left: 12px;
+    margin-bottom: 12px;
+    font-size: 22px;
+}
+
+p {
+    color: black;
+    margin-left: 12px;
+    line-height: 1.6;
+    font-size: 15px;
+}
