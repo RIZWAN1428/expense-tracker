@@ -10,7 +10,9 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary">{{ pageTitle }}</mat-toolbar>
+    <mat-toolbar>
+      <span class="toolbar-title">{{ pageTitle }}</span>
+    </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

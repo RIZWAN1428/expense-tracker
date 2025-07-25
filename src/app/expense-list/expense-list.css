@@ -1,46 +1,77 @@
-/* Card styling */
+/* Full card background like Add Expense */
 .expense-card {
-  background-color: lightgray;
-  padding: 24px;
-  margin: 20px auto;
+  background-color: #b3d9e5; /* soft blue */
+  padding: 1.5rem;
+  border-radius: 15px;
   max-width: 1000px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Title */
 mat-card-title {
-  color: black;
   font-size: 24px;
-  margin-bottom: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
 }
 
-/* Table responsiveness */
+/* Divider */
+mat-divider {
+  margin-bottom: 20px;
+  background-color: #666;
+}
+
+/* Table styling */
 .table-wrapper {
   overflow-x: auto;
+  border-radius: 10px;
 }
 
-/* Table header */
-.mat-header-row {
-  background-color: #f0f0f0;
+/* Table base */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  background-color: #e6e6e6; /* soft grey */
+}
+
+/* Header cells */
+th {
+  background-color: #f08080; /* soft pink */
+  color: black;
   font-weight: bold;
+  padding: 12px;
 }
 
-/* Table cells */
-.mat-cell, .mat-header-cell {
-  padding: 12px 16px;
-  font-size: 14px;
+/* Data cells */
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  color: #333;
 }
 
-/* Row hover effect */
-.mat-row:hover {
-  background-color: #f9f9f9;
-  transition: background-color 0.3s;
+/* Hover effect */
+tr:hover {
+  background-color: #d3ebf5;
 }
 
-/* Action buttons */
-button[mat-button] {
-  font-weight: 500;
-  text-transform: none;
-  padding: 4px 12px;
+button[color="primary"] {
+  background-color: #1976d2;
+  color: white;
+}
+
+button[color="warn"] {
+  background-color: #d32f2f;
+  color: white;
+}
+
+/* Paginator styling (optional) */
+mat-paginator {
+  margin-top: 20px;
+}
+.mat-mdc-paginator {
+  background-color: #d2edf7 !important; /* light blue shade */
+  color: black; /* optional: to change text color */
+  border-radius: 10px; /* optional: for curve */
 }

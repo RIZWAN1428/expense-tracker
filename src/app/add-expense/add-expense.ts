@@ -10,6 +10,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Output, EventEmitter } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
+import { ExpenseService } from '../expense.service';
+
 
 @Component({
 selector: 'app-add-expense',
@@ -29,11 +31,13 @@ templateUrl: './add-expense.html',
 styleUrl: './add-expense.css'
 })
 export class AddExpense implements OnInit {
-constructor(private http: HttpClient, private route: ActivatedRoute) {}
+constructor(private expenseService: ExpenseService, private route: ActivatedRoute) {}
+//expenseService: API service
 
+//route: Access query params
   @Output() expenseAdded = new EventEmitter<void>();
-
-  isLoaded = false;
+//Emits event to parent after add/update.
+  isLoaded = true;  // For showing form after small delay
   title = '';
   category = '';
   amount: number | null = null;
@@ -42,15 +46,16 @@ constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit() {
     setTimeout(() => {
-      this.isLoaded = true;
+      this.isLoaded = true; //Prevents change detection error.
     });
 
     this.route.queryParams.subscribe((params: any) => {
+//Gets id from URL → fetches that expense → fills form using setFormData().
       const id = params['id'];
       if (id) {
-        this.http.get(`http://localhost:3000/expenses/${id}`).subscribe((data: any) => {
-          this.setFormData(data);
-        });
+        this.expenseService.getExpenseById(id).subscribe((data: any) => {
+        this.setFormData(data);
+      });
       }
     });
   }
@@ -59,17 +64,17 @@ constructor(private http: HttpClient, private route: ActivatedRoute) {}
   if (!this.title.trim() || !this.category.trim() || !this.amount || !this.date) {
   alert('Please fill all fields before saving.');
   return;
-}
+}//if (any field is empty) alert & return;
     const newExpense: any = {
       title: this.title,
       category: this.category,
       amount: Number(this.amount),
       date: this.date
-    };
+    };//if (no editId) → call addExpense → alert + emit + reset
 
     if (this.editId) {
       newExpense.id = this.editId;
-      this.http.put(`http://localhost:3000/expenses/${this.editId}`, newExpense).subscribe({
+      this.expenseService.updateExpense(this.editId, newExpense).subscribe({
         next: () => {
           alert('Expense updated!');
           this.expenseAdded.emit();
@@ -78,9 +83,9 @@ constructor(private http: HttpClient, private route: ActivatedRoute) {}
         error: () => {
           alert('Failed to update expense.');
         }
-      });
+      });//if (editId exists) → call updateExpense → alert + emit + reset
     } else {
-      this.http.post('http://localhost:3000/expenses', newExpense).subscribe({
+      this.expenseService.addExpense(newExpense).subscribe({
         next: () => {
           alert('Expense added!');
           this.expenseAdded.emit();
@@ -99,7 +104,7 @@ constructor(private http: HttpClient, private route: ActivatedRoute) {}
     this.amount = expense.amount;
     this.date = new Date(expense.date);
     this.editId = expense.id;
-  }
+  }//Prefills form for editing.
 
   resetForm(){
     this.title = '';
@@ -107,5 +112,5 @@ constructor(private http: HttpClient, private route: ActivatedRoute) {}
     this.amount = null;
     this.date = null;
     this.editId = null;
-  }
+  }//Clears all fields after submit.
 }

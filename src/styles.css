@@ -1,6 +1,17 @@
+h3{
+    background-color: lightgray;
+    color: black;
+    padding: 8px 20px;
+    bottom-margin: 10px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Slight shadow */
+}
+
 /*puri body ke liye*/
 body {
-  background-color: lightgray;
+  background-color: brown;
 }
 /*left side box ki height ke liye*/
 mat-sidenav-container {
@@ -9,22 +20,58 @@ mat-sidenav-container {
 /*left side ke body ke liye*/
 mat-sidenav {
   background-color: lightgray !important;
-  color: white;
+  color: lightgray;
   padding: 20px;
   height: 100%;
   width: 200px !important;
+  border-radius: 0 !important;
+  border-right: 0.1px solid black !important;
 }
 
+mat-nav-list a.mat-list-item {
+  background-color: #f0f0f0;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: black;
+  font-weight: bold;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+mat-nav-list a.mat-list-item:hover {
+  background-color: #d6eaff;
+}
+
+/* Active route highlight */
+mat-nav-list a.active {
+  background-color: lightblue !important;
+  color: white !important;
+}
+
+/*Right side ke body ke liye*/
 mat-sidenav-content {
-  color: white;
+  background-color: lightblue;
 }
 
 mat-toolbar {
-
+  background-color: lightgray!important;
+  display: flex;
+  justify-content: center;
   font-size: 18px;
   font-weight: 600 !important;
   padding: 12px 24px;
   border-bottom: 1px solid;
   border-radius: 4px;
   margin-bottom: 20px !important;
+}
+.toolbar-title {
+  margin: 0 auto;
+  background-color: lightgray;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Slight shadow */
 }
