@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 //Component: Angular component banane ke liye.
 //ViewChild: Template ke element ko class ke andar access karne ke liye.
@@ -10,6 +11,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 //Angular Material ke modules — sidenav, list, toolbar, icons ke liye.
 import { RouterModule, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { AuthService } from './auth/auth.service';
+import { CommonModule } from '@angular/common';
+
 //RouterModule: Routing enable karta hai.
 //Router: Navigation events ko track karta hai.
 //NavigationEnd: Navigation complete hone ke baad ka event.
@@ -26,7 +30,9 @@ MatSidenavModule,
 MatListModule,
 MatToolbarModule,
 MatIconModule,
-RouterModule
+RouterModule,
+FormsModule,
+CommonModule
 ],
 //imports: Jo modules ye component use karega.
 templateUrl: './app.html',
@@ -45,7 +51,7 @@ pageTitle: string = 'Dashboard';
 //!:: Non-null assertion (hamesha value rahegi).
 //static: false: After view init ke baad available hoga.
 
-constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+constructor(private router: Router, private activatedRoute: ActivatedRoute,  public auth: AuthService) {
 //Router, ActivatedRoute: Injected services — routing data ko manage karne ke liye.
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -79,4 +85,14 @@ constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     console.log("formRef is", this.formRef);
     console.log("expenseList is", this.expenseList);
   }
+
+  isLoggedIn(): boolean {
+  return this.auth.isLoggedIn();
+}
+
+logout(): void {
+  this.auth.logout();
+  this.router.navigate(['/login']);
+}
+
 }

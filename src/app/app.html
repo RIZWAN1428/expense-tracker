@@ -1,4 +1,5 @@
-<mat-sidenav-container>
+<!-- Show this only if user is logged in -->
+<mat-sidenav-container *ngIf="auth.isLoggedIn()">
   <mat-sidenav mode="side" opened>
     <h3>Expense Manager</h3>
     <mat-nav-list>
@@ -6,7 +7,10 @@
       <a mat-list-item routerLink="/add" routerLinkActive="active">Add Expense</a>
       <a mat-list-item routerLink="/list" routerLinkActive="active">Expense List</a>
       <a mat-list-item routerLink="/contact" routerLinkActive="active">Contact</a>
+      <a mat-list-item (click)="logout()">Logout</a>
+
     </mat-nav-list>
+
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -16,3 +20,8 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<!-- Show only if NOT logged in -->
+<div *ngIf="!auth.isLoggedIn()">
+  <router-outlet></router-outlet>
+</div>
