@@ -1,58 +1,87 @@
 import { HttpClient } from '@angular/common/http';
-//HttpClient:Used to make HTTP calls (GET, POST, etc.) in Angular.
 import { Injectable } from '@angular/core';
-//@Injectable:Marks a class as injectable (can be used in other parts via dependency injection).
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-//Tells Angular to create one shared instance of this service.
 export class AuthService {
-//Angular Auth Service to handle login & registration.
-
 private baseUrl = 'http://localhost:8080/api/auth';
-//API base path → http://localhost:8080/api/auth
 
 constructor(private http: HttpClient) {}
 
-  register(data: any) {
-  //Sends registration data to backend.
-  const headers = { 'Content-Type': 'application/json' };
-//Tells backend that data is in JSON format.
-  return this.http.post(`${this.baseUrl}/register`, JSON.stringify(data), {
-    headers,
-    responseType: 'text' as 'json'
-  });
-//Sends a POST request to /register API.
-// JSON.stringify(data) :- Converts data object to a JSON string.
-// responseType: 'text' as 'json':- Tells Angular: response is text, but treat it like JSON.
-}
+  register(data: any): Observable<string> {
+    return this.http.post(`${this.baseUrl}/register`, data, { responseType: 'text' });
+  }
 
+  login(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, data).pipe(
+      tap((res: any) => {
+        // Expecting { token: '...' }
+        if (res?.token) {
+          localStorage.setItem('token', res.token);
+          const payload = JSON.parse(atob(res.token.split('.')[1]));
+          localStorage.setItem('role', payload?.role);
+      window.dispatchEvent(new Event("storage"));
+        }
+      })
+    );
+  }
 
-  login(data: any) {
-  return this.http.post(`${this.baseUrl}/login`, data, { responseType: 'text' }).pipe(
-    tap((token: string) => {
-      localStorage.setItem('token', token);
-    })
+  profile(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/profile`);
+  }
+
+  saveToken(token: string) { localStorage.setItem('token', token); }
+  getToken(): string | null { return localStorage.getItem('token'); }
+  logout() { localStorage.removeItem('token'); }
+
+  isLoggedIn(): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+    return !this.isTokenExpired(token);
+  }
+
+  getUserRole(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload?.role ?? null;
+    } catch {
+      return null;
+    }
+  }
+
+  private isTokenExpired(token: string): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const exp: number | undefined = payload?.exp; // seconds since epoch
+      if (!exp) return false; // no exp claim → treat as not expired
+      const nowSec = Math.floor(Date.now() / 1000);
+      return exp <= nowSec;
+    } catch {
+      return true; // invalid token → treat as expired
+    }
+  }
+
+  updateUserRole(id: number, role: string): Observable<string> {
+  return this.http.put(
+    `${this.baseUrl}/users/${id}/role`,
+    { role }, // body
+    { responseType: 'text' }
   );
 }
 
-  saveToken(token: string) {
-    localStorage.setItem('token', token);
-  //Saves JWT token in localStorage.
-  }
+deleteUser(userId: number): Observable<any> {
+ return this.http.delete(`${this.baseUrl}/users/${userId}`, { responseType: 'text' });
+}
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
-//Gets the saved token.
-  }
 
-  isLoggedIn(): boolean {
-    return !!this.getToken();
-    //Checks if token exists → user is logged in.
-  }
+getAllUsers(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/users`);
+}
+updatePermissions(userId: number, body: any) {
+  return this.http.put(`http://localhost:8080/api/auth/users/${userId}/permissions`, body);
+}
 
-  logout() {
-    localStorage.removeItem('token');
-    //Removes token → logs user out.
-  }
 }

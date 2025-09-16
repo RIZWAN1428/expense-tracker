@@ -1,0 +1,72 @@
+<div class="dashboard-container">
+
+
+  <table mat-table [dataSource]="users" class="mat-elevation-z8">
+
+    <!-- ID Column
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+    </ng-container>
+    -->
+    <!-- Username Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Username </th>
+      <td mat-cell *matCellDef="let user" class="highlight-text">
+        {{ user.username }}
+      </td>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <td mat-cell *matCellDef="let user" class="highlight-text">
+        {{ displayRole(user.role) }}
+      </td>
+    </ng-container>
+
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let user">
+        <div class="action-row">
+          <select [(ngModel)]="user.role" class="role-select">
+            <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+          </select>
+
+          <label class="perm-check">
+            <input type="checkbox"
+                   [checked]="user.canDelete"
+                   (change)="togglePermission(user, 'canDelete', $event)">
+            Delete
+          </label>
+
+          <label class="perm-check">
+            <input type="checkbox"
+                   [checked]="user.canEdit"
+                   (change)="togglePermission(user, 'canEdit', $event)">
+            Edit
+          </label>
+
+          <button mat-raised-button color="primary"
+                  class="custom-update-btn"
+                  (click)="updateRole(user.id, user.role)">
+            Update
+          </button>
+
+          <button mat-raised-button color="warn"
+                  class="custom-delete-btn"
+                  (click)="deleteUser(user.id)">
+            Delete
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="['username','role','action']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['username','role','action']"></tr>
+  </table>
+</div>

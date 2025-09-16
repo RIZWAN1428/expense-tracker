@@ -1,0 +1,18 @@
+<div style="text-align:center; margin-top:50px;">
+  <h2>Select Role</h2>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Role</mat-label>
+    <mat-select [(ngModel)]="selectedRole" name="role">
+      <mat-option value="USER">User</mat-option>
+      <mat-option value="EDITOR">Editor</mat-option>
+      <mat-option value="ADMIN">Admin</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div style="margin-top:20px;">
+    <button mat-raised-button color="primary" (click)="selectRole(selectedRole)">
+      Continue
+    </button>
+  </div>
+</div>

@@ -1,77 +1,93 @@
-h3{
-    background-color: lightgray;
-    color: black;
-    padding: 8px 20px;
-    bottom-margin: 10px;
-    border-radius: 12px;
-    font-size: 20px;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Slight shadow */
+h3 {
+  background: linear-gradient(90deg, #90caf9, #42a5f5);
+  color: white;
+  padding: 8px 20px;
+  margin-bottom: 12px;   /* fix bottom-margin */
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 /*puri body ke liye*/
+
 body {
-  background-color: lightblue;
+  min-height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at 20% 20%, #90caf9, transparent),
+              radial-gradient(circle at 80% 30%, #42a5f5, transparent),
+              radial-gradient(circle at 50% 80%, #1e88e5, transparent),
+              #e3f2fd;
+  background-size: cover;
+  animation: floatBg 20s linear infinite;
 }
+
+@keyframes floatBg {
+  0%   { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 1000px 1000px, -1000px 500px, 500px -1000px; }
+}
+
 /*left side box ki height ke liye*/
 mat-sidenav-container {
   height: 97vh;
 }
 /*left side ke body ke liye*/
 mat-sidenav {
-  background-color: lightgray !important;
-  color: lightgray;
+  background: linear-gradient(90deg, #90caf9, #42a5f5);
+  color: white !important;               /* dark text for contrast */
   padding: 20px;
   height: 100%;
-  width: 200px !important;
+  width: 220px !important;
   border-radius: 0 !important;
-  border-right: 0.1px solid black !important;
+  border-right: 1px solid #bbdefb !important;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
 }
 
-mat-nav-list a.mat-list-item {
-  background-color: #f0f0f0;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  padding: 10px 16px;
-  color: black;
-  font-weight: bold;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  transition: background-color 0.3s ease;
-}
 
-mat-nav-list a.mat-list-item:hover {
-  background-color: #d6eaff;
-}
-
-/* Active route highlight */
-mat-nav-list a.active {
-  background-color: lightblue !important;
+mat-sidenav .mat-mdc-list-item .mdc-list-item__primary-text {
   color: white !important;
+  font-weight: 500;
 }
+
+/* Hover effect */
+mat-sidenav .mat-mdc-list-item:hover .mdc-list-item__primary-text {
+  color: #1e88e5 !important;
+}
+
+/* Active link */
+mat-sidenav .mat-mdc-list-item.active .mdc-list-item__primary-text {
+  color: #0d47a1 !important;
+  font-weight: 600;
+}
+
 
 /*Right side ke body ke liye*/
 mat-sidenav-content {
-  background-color: lightblue;
+  background:linear-gradient(90deg, #90caf9, #42a5f5) !important;/* light gradient */
+  min-height: 100vh;
+  padding: 16px;
 }
 
 mat-toolbar {
-  background-color: lightgray!important;
+  background: linear-gradient(90deg, #90caf9, #42a5f5) !important;
+  color: #fff;
   display: flex;
   justify-content: center;
   font-size: 18px;
   font-weight: 600 !important;
   padding: 12px 24px;
-  border-bottom: 1px solid;
-  border-radius: 4px;
+  border-bottom: 1px solid #bbdefb;
+  border-radius: 0;
   margin-bottom: 20px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 .toolbar-title {
   margin: 0 auto;
-  background-color: lightgray;
-  color: black;
-  padding: 8px 16px;
-  border-radius: 12px;
+  background: transparent;   /* no extra box */
+  color: #fff;               /* matches gradient */
+  padding: 0;
+  border-radius: 0;
   font-size: 20px;
-  font-weight: bold;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Slight shadow */
+  font-weight: 600;
+  box-shadow: none;
 }

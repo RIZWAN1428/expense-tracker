@@ -10,9 +10,9 @@ form {
   max-width: 1000px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background-color: #b3d9e5; /* same soft blue as expense card */
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(90deg, #90caf9, #42a5f5) !important; /* soft blue gradient */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   overflow: hidden;
 }
 
@@ -22,27 +22,36 @@ mat-form-field {
   margin-bottom: 16px;
 }
 
-/* Buttons styling */
+/* Buttons general */
 button {
-  border-radius: 24px;
+  border-radius: 20px;
   font-weight: 500;
-  padding: 8px 24px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  padding: 8px 22px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-/* Primary Save Button color same as list */
+/* Primary Save Button */
 button[color="primary"] {
-  background-color: #1976d2;
-  color: white;
-}
-/* Set input and textarea background */
-input.mat-input-element,
-textarea.mat-input-element {
-  background-color: #b3d9e5 !important;
-  color: black !important;
+  background-color: #1e88e5 !important;
+  color: #fff !important;
 }
 
-/* Remove gray hover */
-.mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: #b3d9e5 !important;
+button[color="primary"]:hover {
+  background-color: #1565c0 !important;
+  transform: translateY(-1px);
 }
+
+/* Warn / Delete Button */
+button[color="warn"] {
+  background-color: #d32f2f !important;
+  color: #fff !important;
+}
+
+button[color="warn"]:hover {
+  background-color: #b71c1c !important;
+  transform: translateY(-1px);
+}
+
+/* Input + textarea look */
+

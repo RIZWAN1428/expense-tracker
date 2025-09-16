@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Output, EventEmitter } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { ExpenseService } from '../expense.service';
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -30,8 +31,8 @@ MatSelectModule
 templateUrl: './add-expense.html',
 styleUrl: './add-expense.css'
 })
-export class AddExpense implements OnInit {
-constructor(private expenseService: ExpenseService, private route: ActivatedRoute) {}
+export class AddExpense{
+constructor(private expenseService: ExpenseService, private route: ActivatedRoute, private authService: AuthService) {}
 //expenseService: API service
 
 //route: Access query params
@@ -61,6 +62,7 @@ constructor(private expenseService: ExpenseService, private route: ActivatedRout
   }
 
   saveExpense() {
+ console.log('User role:', this.authService.getUserRole(), 'Edit ID:', this.editId);
   if (!this.title.trim() || !this.category.trim() || !this.amount || !this.date) {
   alert('Please fill all fields before saving.');
   return;

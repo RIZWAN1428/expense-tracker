@@ -1,53 +1,76 @@
 <mat-card class="expense-card">
-  <mat-card-title>Expense Grid</mat-card-title>
+  <mat-card-title>Expense List</mat-card-title>
   <mat-divider></mat-divider>
 
-  <div class="table-wrapper">
+  <!-- Search filter -->
+  <div class="search-bar">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search expenses" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Table -->
+  <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
       <!-- ID Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
 
       <!-- Title Column -->
       <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
       </ng-container>
 
       <!-- Category Column -->
       <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+        <td mat-cell *matCellDef="let element">{{ element.category }}</td>
       </ng-container>
 
       <!-- Amount Column -->
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
-        <td mat-cell *matCellDef="let element"> ₹{{element.amount}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+        <td mat-cell *matCellDef="let element">₹{{ element.amount }}</td>
       </ng-container>
 
       <!-- Date Column -->
       <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.date | date: 'mediumDate'}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.date | date }}</td>
       </ng-container>
 
-      <!-- Actions Column -->
+      <!-- Actions Column (Always Defined) -->
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button color="primary" (click)="editExpense(element)">Edit</button>
-          <button mat-button color="warn" (click)="deleteExpense(element.id)">Delete</button>
+          <!-- Edit button -->
+          <button mat-icon-button color="primary" matTooltip="Edit"
+                  *ngIf="canEdit || role === 'admin' || role === 'user' || role === 'editor'"
+                  (click)="editExpense(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <!-- Delete button -->
+          <button mat-icon-button color="warn" matTooltip="Delete"
+                  *ngIf="canDelete || role === 'admin' || role === 'user' || role === 'editor'"
+                  (click)="deleteExpense(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
       </ng-container>
 
+
+      <!-- Table Header & Row -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+  <!-- Paginator -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </mat-card>

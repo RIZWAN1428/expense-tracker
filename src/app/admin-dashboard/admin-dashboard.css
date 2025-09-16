@@ -1,0 +1,109 @@
+/* Dashboard container */
+.dashboard-container {
+  background: linear-gradient(90deg, #90caf9, #42a5f5) !important;
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 1000px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Section heading */
+/* Force table header text to blue */
+.mat-mdc-header-cell {
+  color: #0d47a1 !important;   /* deep blue text */
+  font-size: 16px;
+  font-weight: 600;
+    text-align: center;
+  background-color: white;  /* light blue box */
+  border-radius: 6px;
+  padding: 5px 56px !important;
+
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* make entire header row look separated */
+.mat-mdc-header-row {
+  background: transparent !important;
+}
+
+
+
+/* Table */
+table {
+  width: 100%;
+  border-radius: 8px;
+  background: #ffffff;             /* clean white */
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Role select dropdown */
+.role-select {
+  width: 120px;
+  padding: 6px 10px;
+  border: 1px solid #1976d2;   /* blue border */
+  border-radius: 8px;
+  background-color: #fff;      /* white box */
+  font-weight: 600;
+  color: #1976d2;              /* blue text */
+  cursor: pointer;
+}
+
+.role-select option {
+  color: #1976d2;              /* blue text inside dropdown */
+}
+
+.role-select:focus {
+  outline: none;
+  border-color: #0d47a1;       /* darker blue on focus */
+  box-shadow: 0 0 4px rgba(25, 118, 210, 0.5);
+}
+
+/* Update button
+.custom-update-btn.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: #1e88e5;
+  --mdc-protected-button-label-text-color: #ffffff;
+  margin-left: 120px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+*/
+/* Highlighted text */
+.highlight-text {
+  font-size: 16px;
+  color: #0d47a1;   /* dark primary for emphasis */
+  font-weight: 500;
+}
+/* Action row flex layout */
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;   /* spacing between items */
+}
+
+/* permission checkboxes look neat */
+.perm-check {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #0d47a1;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+/* Update button */
+.custom-update-btn.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: #1e88e5;
+  --mdc-protected-button-label-text-color: #ffffff;
+  border-radius: 6px;
+  font-weight: 500;
+  margin-left: auto;   /* push buttons to right if needed */
+}
+
+/* Delete button */
+.custom-delete-btn.mat-mdc-raised-button.mat-warn {
+  border-radius: 6px;
+  font-weight: 500;
+}

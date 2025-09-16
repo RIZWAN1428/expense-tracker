@@ -1,6 +1,6 @@
 /* Full card background like Add Expense */
 .expense-card {
-  background-color: #b3d9e5; /* soft blue */
+  background: linear-gradient(90deg, #90caf9, #42a5f5) !important; /* soft blue */
   padding: 1.5rem;
   border-radius: 15px;
   max-width: 1000px;
@@ -12,8 +12,9 @@
 mat-card-title {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: white;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 /* Divider */
@@ -33,13 +34,13 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-radius: 10px;
-  background-color: #e6e6e6; /* soft grey */
+  background-color: white; /* soft grey */
 }
 
 /* Header cells */
 th {
   background-color: #f08080; /* soft pink */
-  color: black;
+  color:#0d47a1 !important;
   font-weight: bold;
   padding: 12px;
 }
@@ -48,7 +49,7 @@ th {
 td {
   padding: 12px;
   border-bottom: 1px solid #ccc;
-  color: #333;
+  color: #0d47a1 !important;
 }
 
 /* Hover effect */
@@ -71,7 +72,24 @@ mat-paginator {
   margin-top: 20px;
 }
 .mat-mdc-paginator {
-  background-color: #d2edf7 !important; /* light blue shade */
-  color: black; /* optional: to change text color */
+  background-color: white !important; /* light blue shade */
+  color:#0d47a1 !important; /* optional: to change text color */
   border-radius: 10px; /* optional: for curve */
+}
+
+
+
+.search-bar mat-label {
+  color: #1e88e5 !important; /* theme blue label */
+  font-weight: 500;
+}
+
+.search-bar input.mat-input-element {
+  color: #0d47a1 !important;
+  font-weight: 500;
+}
+
+
+.search-bar mat-icon {
+  color: #1e88e5;   /* blue search icon */
 }

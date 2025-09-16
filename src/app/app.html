@@ -3,25 +3,50 @@
   <mat-sidenav mode="side" opened>
     <h3>Expense Manager</h3>
     <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      <a mat-list-item routerLink="/add" routerLinkActive="active">Add Expense</a>
-      <a mat-list-item routerLink="/list" routerLinkActive="active">Expense List</a>
-      <a mat-list-item routerLink="/contact" routerLinkActive="active">Contact</a>
-      <a mat-list-item (click)="logout()">Logout</a>
 
-    </mat-nav-list>
+      <a *ngIf="role === 'EDITOR' || role === 'USER'"
+         mat-list-item
+         routerLink="/dashboard"
+         routerLinkActive="active">
+        Dashboard
+      </a>
+      <a *ngIf=" role === 'ADMIN'"
+         mat-list-item
+         routerLink="/admin-dashboard"
+         routerLinkActive="active">
+        Dashboard
+      </a>
+      <a *ngIf="role === 'ADMIN'"
+         mat-list-item
+         routerLink="/expense-list"
+         routerLinkActive="active">
+        Expense List
+      </a>
 
-  </mat-sidenav>
 
-  <mat-sidenav-content>
-    <mat-toolbar>
-      <span class="toolbar-title">{{ pageTitle }}</span>
-    </mat-toolbar>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+      <a *ngIf="role === 'EDITOR' || role === 'ADMIN'"
+         mat-list-item
+         routerLink="/add-expense"
+         routerLinkActive="active">
+        Add Expense
+      </a>
 
-<!-- Show only if NOT logged in -->
+
+      <!--  <a mat-list-item routerLink="/list" routerLinkActive="active">Expense List</a> -->
+        <a mat-list-item routerLink="/contact" routerLinkActive="active">Contact</a>
+        <a mat-list-item (click)="logout()">Logout</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <mat-toolbar>
+        <span class="toolbar-title">{{ pageTitle }}</span>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- Show only if NOT logged in -->
 <div *ngIf="!auth.isLoggedIn()">
   <router-outlet></router-outlet>
 </div>
